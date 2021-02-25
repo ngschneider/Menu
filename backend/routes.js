@@ -1,9 +1,13 @@
 const express = require("express");
 const router = express.Router();
+const command = require("./sqlCommand");
 
-router.get("/test", (req,res) =>	{
+router.get("/menu", (req,res) =>	{
 	console.log("received!");
-	res.send("Request successfully received and sent!");
+	let statement = "SELECT * FROM MenuOptions";
+	command.send([statement], (results) => {
+		res.send(results);
+	});
 });
 
 module.exports = router;
